@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMentor - Home Tutoring Solutions</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #5e057e;
+            --secondary-color: #8e44ad;
+            --accent-color: #3498db;
+        }
+
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+
+        .hero-section {
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(94,5,126,0.9), rgba(142,68,173,0.9)),
+                        url('https://source.unsplash.com/random/1920x1080/?education') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .tutor-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            border-radius: 15px;
+        }
+
+        .tutor-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .floating-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .chat-sidebar {
+            position: fixed;
+            right: -400px;
+            top: 0;
+            height: 100vh;
+            width: 400px;
+            background: white;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            transition: right 0.3s;
+            z-index: 1050;
+        }
+
+        .filter-section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#" style="color: var(--primary-color);">EduMentor</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#tutors">Tutors</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#become-tutor">Become Tutor</a></li>
+                    <li class="nav-item">
+                        <a class="btn btn-danger ms-2" href="/logout">Logout <i class="fas fa-sign-out-alt"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section parallax">
+        <div class="container text-center">
+            <h1 class="display-3 fw-bold mb-4">Find Your Perfect Home Tutor</h1>
+            <div class="filter-section">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <select class="form-select">
+                            <option>Select City</option>
+                            <!-- Add cities dynamically -->
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <select class="form-select">
+                            <option>Select Subject</option>
+                            <!-- Add subjects dynamically -->
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn btn-primary w-100">Search Tutors</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tutors Grid -->
+    <section class="container py-5">
+        <div class="row g-4">
+            <!-- Tutor Card 1 -->
+            <div class="col-md-4">
+                <div class="tutor-card card h-100">
+                    <img src="https://source.unsplash.com/random/400x300/?teacher" class="card-img-top" alt="Tutor">
+                    <div class="card-body">
+                        <h5 class="card-title">John Mathematics</h5>
+                        <p class="text-muted">Mathematics Expert</p>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="badge bg-primary">5+ Years Experience</span>
+                            <span class="h5 text-primary">$30/hr</span>
+                        </div>
+                        <button class="btn btn-outline-primary w-100">Send Message</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Add more tutor cards similarly -->
+        </div>
+    </section>
+
+    <!-- Become Educator Section -->
+    <section class="bg-light py-5">
+        <div class="container text-center">
+            <h2 class="mb-4">Start Teaching Today</h2>
+            <button class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#becomeEducatorModal">
+                Become an Educator <i class="fas fa-chalkboard-teacher"></i>
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>EduMentor</h5>
+                    <p>Transforming education through personalized learning.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">About Us</a></li>
+                        <li><a href="#" class="text-white">Contact</a></li>
+                        <li><a href="#" class="text-white">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Connect With Us</h5>
+                    <div class="social-links">
+                        <a href="#" class="text-white me-3"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div class="modal fade" id="becomeEducatorModal">
+        <!-- Add educator form here -->
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Add interactive JavaScript here
+    </script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+ <meta charset="UTF-8">
+ <title>Registration</title>
+ <style>
+     body {
+       font-family: Arial, sans-serif;
+       background-color: #f2f2f2;
+       margin: 0;
+       padding: 0;
+     }
+
+     header {
+       background-color: #4603fa;
+       color: #fff;
+       text-align: center;
+       padding: 20px;
+     }
+
+     h1 {
+       font-size: 36px;
+       margin-bottom: 10px;
+     }
+
+     .signup-form {
+       max-width: 400px;
+       margin: 20px auto;
+       padding: 50px;
+       background-color: #fff;
+       border-radius: 8px;
+       box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+	  
+     }
+
+     .form-group {
+       margin-bottom: 50px;
+ 	  margin-right: 85px;
+     }
+	 
+	 
+
+     label {
+       display: block;
+       font-size: 16px;
+       margin-bottom: 5px;
+     }
+
+     input {
+       width: 100%;
+       padding: 10px;
+       border: 1px solid #ccc;
+       border-radius: 4px;
+       font-size: 16px;
+	   margin-bottom: 20px;
+     }
+
+     button[type="submit"] {
+       background-color: #4603fa;
+       color: #fff;
+       padding: 12px 24px;
+       font-size: 18px;
+       border: none;
+       border-radius: 4px;
+       cursor: pointer;
+       text-transform: uppercase;
+       transition: background-color 0.3s ease;
+	   margin-bottom: 20px;
+     }
+
+     button[type="submit"]:hover {
+       background-color: #299d00;
+     }
+   </style>
+</head>
+<header>
+   <h1>Sign Up</h1>
+ </header>
+ <div class="signup-form">
+<body>
+	<div class="container">
+ <div class="form-container">
+
+  <div th:if="${param.success}">
+   <div class="success-message">
+    <p>Registration Successful!</p>
+   </div>
+  </div>
+
+  <h2>Registration</h2>
+  <form th:action="@{/register}" method="post" role="form" th:object="${user}">
+   <label for="fullname">FullName:</label>
+   <input th:field="*{fullname}" type="text" id="fullname" name="fullname" placeholder="Enter your FullName"
+    required>
+
+   <label for="username">Username:</label>
+   <input th:field="*{username}" type="text" id="username" name="username" placeholder="Enter your Username"
+    required>
+
+   <label for="password">Password:</label>
+   <input th:field="*{password}" type="password" id="password" name="password"
+    placeholder="Enter your Password" required>
+
+   <button type="submit">Register</button>
+  </form>
+  <div>
+   <span th:if="${Userexist}" style="color: red;">Username is Taken</span>
+  </div>
+  <div>
+   <span class="form-footer">Already have an account? <a th:href="@{/login1}">Login</a>here.</span>
+  </div>
+ </div>
+</body>
+
+</html>
