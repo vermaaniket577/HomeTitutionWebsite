@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify OTP</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #4603fa;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .signin-form {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            margin-right: 25px;
+        }
+
+        label {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button[type="submit"] {
+            background-color: #4603fa;
+            color: #fff;
+            padding: 12px 24px;
+            font-size: 18px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease;
+            margin-right: 10px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #299d00;
+        }
+
+        .resend-btn {
+            background-color: #f44336;
+            color: #fff;
+            padding: 12px 24px;
+            font-size: 18px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease;
+        }
+
+        .resend-btn:hover {
+            background-color: #d32f2f;
+        }
+
+        .resend-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .timer {
+            text-align: center;
+            font-size: 16px;
+            margin: 15px 0;
+            color: #f44336;
+            font-weight: bold;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Verify OTP</h1>
+    </header>
+    
+    <div class="signin-form">
+        <div class="container">
+            <div class="form-container">
+                <h2>Enter OTP</h2>
+                <div class="timer" id="timer">OTP expires in: 02:00</div>
+                <form th:action="@{/verify-otp}" method="post" role="form" th:object="${userDto}">
+                    <div class="form-group">
+                        <label for="otp">OTP:</label>
+                        <input th:field="*{otp}" type="number" id="otp" name="otp" 
+                               placeholder="Enter OTP here" required>
+                    </div>
+                    <div class="button-container">
+                        <button type="submit">Verify OTP</button>
+                        <button type="button" class="resend-btn" id="resendBtn" disabled>Resend OTP</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Set the time in seconds (2 minutes = 120 seconds)
+        let timeLeft = 120;
+        const timer = document.getElementById('timer');
+        const resendBtn = document.getElementById('resendBtn');
+
+        // Update the timer every second
+        const countdown = setInterval(() => {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            
+            // Display the time in MM:SS format
+            timer.textContent = `OTP expires in: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            // If time runs out, stop the timer and enable resend button
+            if (timeLeft <= 0) {
+                clearInterval(countdown);
+                timer.textContent = "OTP has expired!";
+                resendBtn.disabled = false;
+            } else {
+                timeLeft--;
+            }
+        }, 1000);
+
+        // Resend OTP button functionality
+        resendBtn.addEventListener('click', function() {
+            // Here you would typically make
