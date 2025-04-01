@@ -70,7 +70,7 @@ public class ForgotpasswordController {
         session.setAttribute("username", username);
         session.setAttribute("otpTime", System.currentTimeMillis()); // Add this line
 
-        System.out.println("Generated OTP: " + otp);
+        System.out.println("Generated New OTP: " + otp);
         System.out.println("Stored OTP in session: " + session.getAttribute("otp"));
 
         
